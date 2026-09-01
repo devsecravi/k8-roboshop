@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: debug
-  namespace: robosop
+  namespace: roboshop
 spec:
   containers:
   - name: debug
