@@ -40,9 +40,30 @@ spec:
       containers:
       - name: catalogue
         image: ravid145/catalogue:1.0.0
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits: 
+            cpu: "100m"
+            memory: "128Mi"
+        readinessProbe:
+          tcpSocket: 
+             port: 8080
+          failureThreshold: 
+          periodSeconds: 10
+          initialDelaySeconds: 15
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          failureThreshold: 2
+          periodSeconds: 10
+
         envFrom:
         - configMapRef:
             name: catalogue
+        
 ---
 apiVersion: v1
 kind: Service
@@ -54,6 +75,7 @@ metadata:
     environment: dev
     tier: backend
 spec:
+  type: LoadBalancer
   selector:
     project: roboshop
     environment: dev
