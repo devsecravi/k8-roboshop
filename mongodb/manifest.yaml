@@ -11,7 +11,7 @@ metadata:
     kubernetes.io/change-cause: "moving  to alpine3.23-perl"
 
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       project: roboshop
